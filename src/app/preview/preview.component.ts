@@ -2,53 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { ImagesService } from '../services/images/images.service';
 
 @Component({
-  selector: 'app-preview',
-  templateUrl: './preview.component.html',
-  styleUrls: ['./preview.component.css']
+    selector: 'app-preview',
+    templateUrl: './preview.component.html',
+    styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent implements OnInit {
 
-  constructor(private imageService: ImagesService) { }
-  images;
-  sortedSections: any = [];
-  sections: any;
-  newSections: {};
+    images: Array<object>;
+    sortedSections: string[][] = [];
+    sections: any;
+    newSections: {};
 
-  ngOnInit() {
-    this.sections = this.imageService.getCategories();
-    // this.sections.forEach(section => {
-    //   this.imageService.getImagesBySection(section).subscribe(
-    //     (next) => this.images = next.photos;
-    // });
+    constructor(private imageService: ImagesService) { }
 
-    let chunk = 4;
+    ngOnInit() {
+        this.imageService.getImagesBySection('people').subscribe((data: any) => this.images = data.photos);
+        this.sections = this.imageService.getCategories();
 
-    for (let i = 0, j = this.sections.length; i < j; i += chunk) {
-      this.sortedSections.push(this.sections.slice(i, i + chunk));
-    }
+        let chunk = 4;
 
-    let lastArray = this.sortedSections[this.sortedSections.length - 1];
-    let difference = 0;
-    let arraySort = [];
-    if (lastArray.length < 4)
-      lastArray.length = 4;
+        for (let i = 0, j = this.sections.length; i < j; i += chunk) {
+            this.sortedSections.push(this.sections.slice(i, i + chunk));
+        }
 
-    this.sections = this.sortedSections;
+        let lastArray = this.sortedSections[this.sortedSections.length - 1];
+        let difference = 0;
+        let arraySort = [];
+        if (lastArray.length < 4)
+            lastArray.length = 4;
 
+        this.sections = this.sortedSections;
+    };
 
-  }
-  
+    onSectionChange(section) {
+        if (section == '')
+            return;
 
-
-
-  onSectionChange(section) {
-    if (section == '')
-      return;
-
-    this.imageService.getImagesBySection(section).subscribe((data: any) => {
-    console.log(data);
-      this.images = data.photos
-    } );
-  }
+        this.imageService.getImagesBySection(section).subscribe((data: any) => {
+            this.images = data.photos
+        });
+    };
 
 }

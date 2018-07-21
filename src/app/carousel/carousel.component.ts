@@ -1,108 +1,114 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { ImagesService } from './../services/images/images.service';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css']
+    selector: 'app-carousel',
+    templateUrl: './carousel.component.html',
+    styleUrls: ['./carousel.component.css']
 })
-export class CarouselComponent implements OnChanges {
-  leftDisabled: boolean = true;
-  rightDisabled: boolean = false;
-  imgToPreview: number = 0;
-  copiedSuccessfully: boolean = false;
-  images = [];
-  constructor() { }
+export class CarouselComponent implements OnInit, OnChanges {
+    leftDisabled: boolean = true;
+    rightDisabled: boolean = false;
+    imgToPreview: number = 0;
+    copiedSuccessfully: boolean = false;
+    currentSection;
+    images = [];
+    bodyWidth: number = document.querySelector('body').offsetWidth;
 
-  bodyWidth = document.querySelector('body').offsetWidth;
+    constructor(private router: Router, private route: ActivatedRoute, private imgService: ImagesService) {
+        this.currentSection = this.route.snapshot.paramMap.get('section');
 
-
-
-  ngOnChanges(changes: SimpleChanges){
-    if (changes.images) {
-      this.images = changes.images.currentValue;
-      document.documentElement.scrollTop = 0;
+        this.imgService.getImagesBySection(this.currentSection).subscribe((data: any) => {
+            this.images = data.photos;
+        });
     };
-  };
 
-  //Showing chosen item 
-  showChosenItem(index) {
-    this.copiedSuccessfully = false;
-    //Checking whether item we choose is eithe last or first 
-    this.leftDisabled = index == 0;
-    this.rightDisabled = index == this.images.length - 1
+    ngOnInit() {
+    }
 
-    this.imgToPreview = index;
-  };
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.images) {
+            this.images = changes.images.currentValue;
+            document.documentElement.scrollTop = 0;
+        };
+    };
 
+    showChosenItem(index) {
+        this.copiedSuccessfully = false;
+        //Checking whether item we choose is eithe last or first 
+        this.leftDisabled = index == 0;
+        this.rightDisabled = index == this.images.length - 1
+        this.imgToPreview = index;
+    };
 
-  showNextImage() {
-    this.copiedSuccessfully = false;
-    //Arrows accessibility section
-    this.leftDisabled = false;
-    this.rightDisabled = this.imgToPreview + 2 >= this.images.length;
-    if (this.imgToPreview == this.images.length - 1)
-      return;
+    showNextImage() {
+        this.copiedSuccessfully = false;
+        //Arrows accessibility section
+        this.leftDisabled = false;
+        this.rightDisabled = this.imgToPreview + 2 >= this.images.length;
+        if (this.imgToPreview == this.images.length - 1)
+            return;
 
-    //Showing next image
-    this.imgToPreview++;
+        //Showing next image
+        this.imgToPreview++;
 
-    //Moving slider in the bottom slider section
-    let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-    let sliderWidth = slider.offsetWidth;
-    let f = this.imgToPreview / 3;
-    if (Number.isInteger(f))
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth;
-  };
+        //Moving slider in the bottom slider section
+        let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+        let sliderWidth: number = slider.offsetWidth;
+        let f = this.imgToPreview / 3;
+        if (Number.isInteger(f))
+            document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth;
+    };
 
-  showPrevImage() {
-    this.copiedSuccessfully = false;
-    //Arrows accessibility section
-    this.leftDisabled = this.imgToPreview - 2 < 0;
-    this.rightDisabled = false;
-    if (this.imgToPreview == 0)
-      return;
+    showPrevImage() {
+        this.copiedSuccessfully = false;
+        //Arrows accessibility section
+        this.leftDisabled = this.imgToPreview - 2 < 0;
+        this.rightDisabled = false;
+        if (this.imgToPreview == 0)
+            return;
 
-    //Showing previous image
-    this.imgToPreview--;
+        //Showing previous image
+        this.imgToPreview--;
 
-    //Moving slider in the bottom slider section
-    let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-    let sliderWidth = slider.offsetWidth;
-    let f = (this.imgToPreview + 1) / 3;
-    if (Number.isInteger(f))
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
-    else
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth;
+        //Moving slider in the bottom slider section
+        let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+        let sliderWidth: number = slider.offsetWidth;
+        let f: number = (this.imgToPreview + 1) / 3;
+        if (Number.isInteger(f))
+            document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
+        else
+            document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth;
 
-  };
+    };
 
+    copyToClipboard() {
 
-  copyToClipboard() {
+        //Creating input out of user's view
+        let newElement = document.createElement('input');
+        let bodyElement: HTMLElement = document.querySelector('body');
+        //To prevent user from seeing created input
+        newElement.style.position = 'absolute';
+        newElement.style.top = '-2000rem';
+        newElement.style.left = '-2000rem';
 
-    //Creating input out of user's view
-    let newElement = document.createElement('input');
-    let bodyElement = document.querySelector('body');
-    //To prevent user from seeing created input
-    newElement.style.position = 'absolute';
-    newElement.style.top = '-2000rem';
-    newElement.style.left = '-2000rem';
+        //Passing image link into input field
+        newElement.value = this.images[this.imgToPreview];
 
-    //Passing image link into input field
-    newElement.value = this.images[this.imgToPreview];
+        //Appending element to body and adding link to the clipboard
+        bodyElement.appendChild(newElement);
+        newElement.select();
+        let clipboardCopy = document.execCommand('copy');
 
-    //Appending element to body and adding link to the clipboard
-    bodyElement.appendChild(newElement);
-    newElement.select();
-    let clipboardCopy = document.execCommand('copy');
+        if (clipboardCopy)
+            this.copiedSuccessfully = true;
+        else
+            console.log('error while copying to clipbaord');
 
-    if (clipboardCopy)
-      this.copiedSuccessfully = true;
-    else
-      console.log('error while copying to clipbaord');
-
-    //Removing created element from the body
-    bodyElement.removeChild(newElement);
-  };
+        //Removing created element from the body
+        bodyElement.removeChild(newElement);
+    };
 }
 
 

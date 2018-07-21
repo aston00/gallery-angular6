@@ -6,18 +6,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { PreviewComponent } from '../preview/preview.component';
 
 const routes: Routes = [
-  {path: 'carousel', component: CarouselComponent},
-  {path: 'preview', component: PreviewComponent},
-  {path: '', redirectTo: 'preview', pathMatch: 'full'},
-  {path: '**', component: ErrorsHandlingComponent}
+    { path: 'carousel/:section', component: CarouselComponent },
+    { path: 'preview', component: PreviewComponent },
+    { path: '', redirectTo: 'preview', pathMatch: 'full' },
+    { path: '**', component: ErrorsHandlingComponent }
 ]
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  declarations: [],
-  exports: [RouterModule]
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(routes)
+    ],
+    declarations: [],
+    exports: [RouterModule]
 })
 export class RouterModuleModule { }

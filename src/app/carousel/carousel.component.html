@@ -7,7 +7,7 @@
         <div>
           <div class="carousel-main-container" [ngStyle]="{'margin-left': (0 - imgToPreview * 1200) + (bodyWidth - 1200)/2  + 'px'}">
             <div *ngFor="let img of images; index as i; trackBy i">
-              <div class="carousel-preview-image" [ngStyle]="{'background-image':'url(' + img + ')', 'opacity': imgToPreview == i ? '1' : '0'}">
+              <div class="carousel-preview-image" [ngStyle]="{'background-image':'url(' + img.src.large + ')', 'opacity': imgToPreview == i ? '1' : '0'}">
               </div>
             </div>
           </div>
@@ -26,8 +26,8 @@
           </div>
 
           <div class="clipboard-container">
-            <p ng-if="!copiedSuccessfully" (click)="copyToClipboard()" class="clipboard-copy-button">Copy image link</p>
-            <p ng-if="copiedSuccessfully" class="clipboard-success-message">Added to the clipboard!</p>
+            <p *ngIf="!copiedSuccessfully" (click)="copyToClipboard()" class="clipboard-copy-button">Copy image link</p>
+            <p *ngIf="copiedSuccessfully" class="clipboard-success-message">Added to the clipboard!</p>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
     <div class="carousel-bottomt-slider">
       <div *ngFor="let image of images; index as i; trackBy i" class="carousel-bottom-item-container" [ngClass]="{'chosen' : i == imgToPreview }"
         (click)="showChosenItem(i)">
-        <div class="carousel-bottom-item" [ngStyle]="{'background-image':'url(' + image + ')'}" (click)="showImage(image)"></div>
+        <div class="carousel-bottom-item" [ngStyle]="{'background-image':'url(' + image.src.large + ')'}" (click)="showImage(image)"></div>
       </div>
     </div>
   </section>

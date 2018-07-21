@@ -1,49 +1,50 @@
 import { Component, OnInit, Input, Output, SimpleChange, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 
-
 @Component({
-  selector: 'app-sections-menu',
-  templateUrl: './sections-menu.component.html',
-  styleUrls: ['./sections-menu.component.css']
+    selector: 'app-sections-menu',
+    templateUrl: './sections-menu.component.html',
+    styleUrls: ['./sections-menu.component.css']
 })
 export class SectionsMenuComponent implements OnInit, OnChanges {
-  @Input() sections: Array<string>;
-  @Output() getImages = new EventEmitter();
-  currentSection: number = 0;
-  topDisabled: boolean = true;
-  bottomDisabled: boolean = false;
-  constructor() { }
 
-  ngOnInit() {
-    console.log(this.sections);
-  }
+    @Input() sections: Array<string>;
+    @Output() getImages = new EventEmitter();
 
-  getImagesBySection(section){
-    this.getImages.emit(section);
-  }
+    currentSection: number = 0;
+    topDisabled: boolean = true;
+    bottomDisabled: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges){
-      if (changes.sections && changes.sections.currentValue) 
-          this.sections = changes.sections.currentValue;
-  };
+    constructor() { }
 
-  showNextSections() {
-    let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
-    let height = eleme.offsetHeight;
-    let scrollHeight = eleme.scrollHeight;
-    eleme.scrollTop += height;
-    this.topDisabled = false;
-    this.bottomDisabled = this.currentSection == this.sections.length - 2;
-    this.currentSection++;
-  };
+    ngOnInit() {
+    };
 
-  showPrevSections() {
-    this.topDisabled = this.currentSection <= 1;
-    let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
-    let height = eleme.offsetHeight;
-    let now = eleme.scrollTop;
-    eleme.scrollTop = now - height;
-    this.bottomDisabled = false;
-    this.currentSection--;
-  };
+    getImagesBySection(section) {
+        this.getImages.emit(section);
+    };
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.sections && changes.sections.currentValue)
+            this.sections = changes.sections.currentValue;
+    };
+
+    showNextSections() {
+        let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        let height = eleme.offsetHeight;
+        let scrollHeight = eleme.scrollHeight;
+        eleme.scrollTop += height;
+        this.topDisabled = false;
+        this.bottomDisabled = this.currentSection == this.sections.length - 2;
+        this.currentSection++;
+    };
+
+    showPrevSections() {
+        this.topDisabled = this.currentSection <= 1;
+        let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        let height = eleme.offsetHeight;
+        let now = eleme.scrollTop;
+        eleme.scrollTop = now - height;
+        this.bottomDisabled = false;
+        this.currentSection--;
+    };
 }
