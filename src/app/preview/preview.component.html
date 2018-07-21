@@ -1,0 +1,11 @@
+<section class="gallery-section">
+  <div class="container">
+      <div class="gallery-heading">
+          <h2>Gallery of your dream</h2>
+      </div>
+      <div class="gallery-folder">
+          <app-sections-menu [sections]="sections" (getImages)="onSectionChange($event)" style="flex-basis:30%;"></app-sections-menu>
+           <app-preview-samples [images]="images" style="flex-basis:70%;"></app-preview-samples>
+      </div>
+  </div>
+</section>

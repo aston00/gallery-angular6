@@ -1,0 +1,15 @@
+.footer-section {
+    background-color: inherit;
+}
+
+.footer-info-container {
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-info-container>h2 {
+    font-size: 3rem;
+    color: #1E90FF;
+}

@@ -1,0 +1,46 @@
+.nav_bav {
+    background-color: #35424a;
+    border-bottom: #1E90FF 3px solid;
+    height: 8rem;
+}
+
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: inherit;
+}
+
+.responsive_text {}
+
+.responsive_text h3 {
+    font-size: 3.2rem;
+    color: white;
+}
+
+.responsive_text span {
+    color: #1E90FF;
+    cursor: pointer;
+}
+
+.list {
+    display: flex;
+    list-style: none;
+}
+
+.list li {
+    color: white;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+}
+
+.list>li>a:link,
+.list>li>a:visited,
+.list>li>a:active {
+    color: #fafafa;
+    text-decoration: none;
+}
+
+.list>li>a:hover {
+    color: #1E90FF;
+}

@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+*, *::before, *::after, body {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+.container {
+    height: inherit;
+    width: 80%;
+    margin: auto;
+}
+
+body {
+    overflow-X: hidden;
+    /* position: relative; */
+    background-color: mintcream;
+    /* font-family: 'Crafty Girls', cursive; */
+    font-family: 'Kavivanar', cursive;
+}

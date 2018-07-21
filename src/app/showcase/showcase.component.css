@@ -1,0 +1,32 @@
+.showcase {
+    height: 80vh;
+    background: url(/assets/img/street.jpg) no-repeat 0 -20vh;
+    background-attachment: fixed;
+}
+
+.showcase-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.showcase-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.showcase-welcome {
+    color: #fafafa;
+    font-size: 7rem;
+    letter-spacing: .3rem;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.showcase-creator {
+    color: #fafafa;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px #000000;
+}

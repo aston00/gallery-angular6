@@ -1,0 +1,7 @@
+<section class="gallery-previewer">
+  <div class="gallery-previewer-container">
+      <div class="gallery-previewer-composition">
+          <img *ngFor="let image of (images | limitBy:3); let i = index;  trackBy i" [ngStyle]="{'background-image': 'url(' + image.src.large + ')'}" alt="" class="gallery-previewer-example">
+      </div>
+  </div>
+</section>

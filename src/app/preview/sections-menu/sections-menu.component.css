@@ -1,0 +1,93 @@
+.gallery-sidemenu {
+    flex-basis: 30%;
+    background-color: inherit;
+}
+
+.gallery-sidemenu-link-container {
+    margin-top: 8rem;
+    padding-left: 32rem;
+}
+
+.gallery-sidemenu-link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 18rem;
+    overflow: hidden;
+}
+
+.gallery-sidemenu-link-item {
+    border-bottom: 1px solid #cccccc;
+    height: 4.5rem;
+    min-height: 4.5rem;
+    position: relative;
+    padding: .5rem 1.5rem .5rem 1.5rem;
+    cursor: pointer;
+}
+
+.gallery-sidemenu-link-item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, border .4s, background-color 0.1s;
+}
+
+.gallery-sidemenu-link-item:hover:before {
+    border-bottom: 3px solid #1E90FF;
+    transform: scaleY(1);
+    width: 100%;
+}
+
+.gallery-sidemenu-link-a {
+    text-shadow: 2px 5px 10px #ccc;
+    position: relative;
+    color: #333333;
+    text-decoration: none;
+    display: inline-block;
+    width: 18rem;
+    font-style: italic;
+    text-transform: capitalize;
+    letter-spacing: .3rem;
+    font-size: 2.5rem;
+    font-weight: 100;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.down-button,
+.up-button {
+    display: block;
+    box-shadow: 2px 3px 5px #ccc;
+    border-radius: 20px;
+    margin: auto;
+    width: 3rem;
+    fill: #1E90FF;
+    margin-left: 9rem;
+    height: 3rem;
+    cursor: pointer;
+    transition: all .4s ease-in;
+}
+
+.up-button:hover {
+    transform: rotateZ(360deg) scale(1.2);
+}
+
+.down-button {
+    margin-top: 1rem;
+}
+
+.down-button:hover {
+    transform: rotateZ(360deg) scale(1.2);
+}
+
+.fadeSectionArrow {
+    cursor: unset !important;
+    opacity: 0;
+}

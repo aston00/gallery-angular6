@@ -1,0 +1,45 @@
+.gallery-previewer {
+    background-color: white;
+}
+
+.gallery-previewer-composition {
+    display: block;
+    position: relative;
+    width: 50%;
+    margin: auto;
+    margin-top: 5rem;
+}
+
+.gallery-previewer-example {
+    width: 35rem;
+    height: 20rem;
+    position: absolute;
+    z-index: 1;
+    background-size: cover;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    transition: all .2s;
+    outline-offset: 2rem;
+}
+
+.gallery-previewer-example:hover {
+    z-index: 100;
+    outline: 1.5rem solid darkslategrey;
+    box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+    transform: scale(1.05) translateY(-0.5rem);
+}
+
+.gallery-previewer-example:nth-child(1) {
+    top: 0;
+    left: 0;
+}
+
+.gallery-previewer-example:nth-child(2) {
+    top: 13rem;
+    left: 11rem;
+}
+
+.gallery-previewer-example:nth-child(3) {
+    top: 4rem;
+    left: 24rem;
+}
