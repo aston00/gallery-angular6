@@ -92,9 +92,9 @@ export class CarouselComponent implements OnInit, OnChanges {
         newElement.style.position = 'absolute';
         newElement.style.top = '-2000rem';
         newElement.style.left = '-2000rem';
-
+        debugger;
         //Passing image link into input field
-        newElement.value = this.images[this.imgToPreview];
+        newElement.value = this.images[this.imgToPreview].url;
 
         //Appending element to body and adding link to the clipboard
         bodyElement.appendChild(newElement);
