@@ -4,21 +4,21 @@
       <h2 class="signin-header">Sign In</h2>
     </div>
     <div class="signin-form-container">
-      <form (ngSubmit)="onSubmit($event)" class="signin-form">
+      <form  class="signin-form">
         <div class="signin-email-holder">
-          <input id="signin-email" type="text" placeholder="Email" class="signin-email-input">
+          <input id="signin-email" [(ngModel)]="email" name="email" maxlength="40" type="text" placeholder="&nbsp;" class="signin-email-input">
           <label class="signin-email-label" for="signin-email">Email</label>
         </div>
         <div class="signin-password-holder">
-          <input id="signin-password" maxlength="30" #password placeholder="password" type="password" class="signin-password-input">
+          <input id="signin-password" maxlength="30" name="password" [(ngModel)]="password" #innerPassword placeholder="&nbsp;" type="password" class="signin-password-input">
           <label class="signin-password-label" for="signin-password">Password</label>
-          <svg class="password-show-btn" (click)="password.type = password.type == 'text' ? 'password' : 'text'">
-            <use style="pointer-events: none" [attr.xlink:href]="password.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
+          <svg class="password-show-btn" (click)="innerPassword.type = password.type == 'text' ? 'password' : 'text'">
+            <use style="pointer-events: none" [attr.xlink:href]="innerPassword.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
           </svg>
         </div>
         <div class="signin-actions">
           <div class="signin-submit-holder">
-            <input class="signin-submit-button" type="submit" value="Sign in">
+            <input (click)="showSubmit()" class="signin-submit-button" type="submit" value="Sign in">
           </div>
           <div class="go-signup-button-holder">
             <input class="go-signup-button" routerLink="/sign/signup" type="submit" value="Sign up">

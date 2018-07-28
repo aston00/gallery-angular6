@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
+  // @ViewChild('password') password: string;
+  email: string = '';
+  password: string = '';
   constructor() { }
 
-  onSubmit(event) {
-    event.preventDefault();
+  showSubmit() {
+    console.log(this.email, this.password);
   }
 
   ngOnInit() {

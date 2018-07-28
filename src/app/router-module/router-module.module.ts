@@ -2,6 +2,7 @@ import { SignComponent } from './../sign/sign.component';
 import { ErrorsHandlingComponent } from './../errors-handling/errors-handling.component';
 import { CarouselComponent } from './../image-carousel/carousel.component';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // <--- JavaScript import from Angular
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PreviewComponent } from '../preview/preview.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         RouterModule.forRoot(routes),
         SignRouterModule
     ],
