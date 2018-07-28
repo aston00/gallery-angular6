@@ -93,10 +93,10 @@ export class CarouselComponent implements OnInit, OnChanges {
         newElement.style.top = '-2000rem';
         newElement.style.left = '-2000rem';
         debugger;
-        //Passing image link into input field
+        //Passing image section into input field
         newElement.value = this.images[this.imgToPreview].url;
 
-        //Appending element to body and adding link to the clipboard
+        //Appending element to body and adding section to the clipboard
         bodyElement.appendChild(newElement);
         newElement.select();
         let clipboardCopy = document.execCommand('copy');

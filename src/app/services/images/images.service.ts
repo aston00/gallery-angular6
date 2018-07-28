@@ -11,15 +11,19 @@ const httpOptions = {
 })
 export class ImagesService {
 
-    sections: string[] = ['nature',
+    sections: string[] = [
         'people',
         'women',
+        'men',
+        'love',
+        'suits',
         'black',
         'rain',
+        'streets',
         'forest',
         'nature',
-        'suits',
-        'love'
+        'sea',
+        'water'
     ];
 
 
@@ -28,7 +32,7 @@ export class ImagesService {
     getCategories() {
         return this.sections;
     };
-
+    //TODO:: LAZY LOADING  + 15items
     getImagesBySection(section) {
         return this.http.get(`https://api.pexels.com/v1/search?query=${section}&per_page=15&page=1`, httpOptions)
     };

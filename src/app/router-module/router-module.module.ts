@@ -1,5 +1,5 @@
 import { ErrorsHandlingComponent } from './../errors-handling/errors-handling.component';
-import { CarouselComponent } from './../carousel/carousel.component';
+import { CarouselComponent } from './../image-carousel/carousel.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
