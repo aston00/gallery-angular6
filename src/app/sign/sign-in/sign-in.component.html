@@ -16,19 +16,12 @@
             <use style="pointer-events: none" [attr.xlink:href]="password.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
           </svg>
         </div>
-        <div class="signin-password-confirm-holder">
-          <input id="signin-password-confirm" maxlength="30" #confirm placeholder="Confirm" type="password" class="signin-password-confirm-input">
-          <label class="signin-password-confirm-label" for="signin-password-confirm">Confirm password</label>
-          <svg class="password-show-btn" (click)="confirm.type = confirm.type == 'text' ? 'password' : 'text'">
-            <use style="pointer-events: none" [attr.xlink:href]="confirm.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
-          </svg>
-        </div>
         <div class="signin-actions">
           <div class="signin-submit-holder">
             <input class="signin-submit-button" type="submit" value="Sign in">
           </div>
           <div class="go-signup-button-holder">
-            <input class="go-signup-button" type="submit" value="Sign up">
+            <input class="go-signup-button" routerLink="/sign/signup" type="submit" value="Sign up">
           </div>
         </div>
 

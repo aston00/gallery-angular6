@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PreviewComponent } from '../preview/preview.component';
+import { SignRouterModule } from '../sign/sign-router/sign-router.module';
 
 const routes: Routes = [
     { path: 'carousel/:section', component: CarouselComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        SignRouterModule
     ],
     declarations: [],
     exports: [RouterModule]

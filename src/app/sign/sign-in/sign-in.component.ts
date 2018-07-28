@@ -9,7 +9,7 @@ export class SignInComponent implements OnInit {
 
   constructor() { }
 
-  onSubmit(event){
+  onSubmit(event) {
     event.preventDefault();
   }
 

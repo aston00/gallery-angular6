@@ -1,3 +1,41 @@
-<p>
-  sign-up works!
-</p>
+<section class="signup-section">
+  <div class="signup-container">
+    <div class="signup-header-container">
+      <h2 class="signup-header">Sign Up</h2>
+    </div>
+    <div class="signup-form-container">
+      <form (ngSubmit)="onSubmit($event)" class="signup-form">
+        <div class="signup-email-holder">
+          <input id="signup-email" type="text" placeholder="Email" class="signup-email-input">
+          <label class="signup-email-label" for="signup-email">Email</label>
+        </div>
+        <div class="signup-password-holder">
+          <input id="signup-password" maxlength="30" #password placeholder="password" type="password" class="signup-password-input">
+          <label class="signup-password-label" for="signup-password">Password</label>
+          <svg class="password-show-btn" (click)="password.type = password.type == 'text' ? 'password' : 'text'">
+            <use style="pointer-events: none" [attr.xlink:href]="password.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
+          </svg>
+        </div>
+        <div class="signup-password-confirm-holder">
+          <input id="signup-password-confirm" maxlength="30" #confirm placeholder="Confirm" type="password" class="signup-password-confirm-input">
+          <label class="signup-password-confirm-label" for="signup-password-confirm">Confirm password</label>
+          <svg class="password-show-btn" (click)="confirm.type = confirm.type == 'text' ? 'password' : 'text'">
+            <use style="pointer-events: none" [attr.xlink:href]="confirm.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
+          </svg>
+        </div>
+        <label class="signup-confirm-action"> I am not a robot
+          <input type="checkbox" checked="checked" class="signup-notbot-confirm">
+          <span class="signup-notbot-confirm-checkmark"></span>
+        </label>
+        <div class="signup-actions">
+          <div class="signup-submit-holder">
+            <input class="signup-submit-button" type="submit" value="Sign up">
+          </div>
+          <div class="go-signin-button-holder">
+            <input class="go-signin-button" routerLink="/sign/signin" type="submit" value="Sign in">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

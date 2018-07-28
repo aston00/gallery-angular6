@@ -34,8 +34,9 @@ import { SignModuleModule } from './sign/sign-module/sign-module.module';
   imports: [
     SignModuleModule,
     BrowserModule,
-    RouterModuleModule,
-    HttpClientModule
+
+    HttpClientModule,
+    RouterModuleModule
   ],
   providers: [ImagesService],
   bootstrap: [AppComponent]

@@ -11,6 +11,10 @@
     user-select: none;
     outline: none;
 }
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #fafafa;
+    -webkit-text-fill-color: #10b295 !important;
+}
 
 html {
     font-size: 62.5%;
