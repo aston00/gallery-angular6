@@ -1,25 +1,37 @@
 <section class="signin-section">
   <div class="signin-container">
     <div class="signin-header-container">
-      <h2 class="signin-header"></h2>
+      <h2 class="signin-header">Sign In</h2>
     </div>
     <div class="signin-form-container">
-      <form class="signin-form">
+      <form (ngSubmit)="onSubmit($event)" class="signin-form">
         <div class="signin-email-holder">
-          <input id="signin-email" type="text" class="signin-email-input">
-          <label class="signin-email-label" for="signin-email"></label>
+          <input id="signin-email" type="text" placeholder="Email" class="signin-email-input">
+          <label class="signin-email-label" for="signin-email">Email</label>
         </div>
         <div class="signin-password-holder">
-          <input id="signin-password" type="text" class="signin-password-input">
-          <label class="signin-password-label" for="signin-password"></label>
+          <input id="signin-password" maxlength="30" #password placeholder="password" type="password" class="signin-password-input">
+          <label class="signin-password-label" for="signin-password">Password</label>
+          <svg class="password-show-btn" (click)="password.type = password.type == 'text' ? 'password' : 'text'">
+            <use style="pointer-events: none" [attr.xlink:href]="password.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
+          </svg>
         </div>
         <div class="signin-password-confirm-holder">
-          <input id="signin-password-confirm" type="text" class="signin-password-confirm-input">
-          <label class="signin-password-confirm-label" for="signin-password-confirm"></label>
+          <input id="signin-password-confirm" maxlength="30" #confirm placeholder="Confirm" type="password" class="signin-password-confirm-input">
+          <label class="signin-password-confirm-label" for="signin-password-confirm">Confirm password</label>
+          <svg class="password-show-btn" (click)="confirm.type = confirm.type == 'text' ? 'password' : 'text'">
+            <use style="pointer-events: none" [attr.xlink:href]="confirm.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
+          </svg>
         </div>
-        <div class="signin-submit-holder">
-          <input class="signin-submit-button" type="submit" value="Sign in">
+        <div class="signin-actions">
+          <div class="signin-submit-holder">
+            <input class="signin-submit-button" type="submit" value="Sign in">
+          </div>
+          <div class="go-signup-button-holder">
+            <input class="go-signup-button" type="submit" value="Sign up">
+          </div>
         </div>
+
       </form>
     </div>
   </div>

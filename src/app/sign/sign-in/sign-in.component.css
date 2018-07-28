@@ -1,17 +1,179 @@
-.signin-section{}
-.signin-container{}
-.signin-header-container{}
-.signin-header{}
-.signin-form-container{}
-.signin-form{}
-.signin-email-holder{}
-.signin-email-input{}
-.signin-email-label{}
-.signin-password-holder{}
-.signin-password-input{}
-.signin-password-label{}
-.signin-password-confirm-holder{}
-.signin-password-confirm-input{}
-.signin-password-confirm-label{}
-.signin-submit-holder{}
-.signin-submit-button{}
+.signin-section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 12rem;
+}
+
+.signin-container {
+    background-color: #fafafa;
+    border: 2px solid #cccccc;
+    box-shadow: 2px 2px 6px #ccc;
+    width: 28%;
+    /* padding-bottom: 3rem; */
+}
+
+.signin-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-header {
+    font-size: 7rem;
+    color: #10b295;
+}
+
+.signin-form-container {
+    margin: 3rem 3rem 4rem 3rem;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signin-email-holder,
+.signin-password-holder,
+.signin-password-confirm-holder {
+  display: block;
+  position: relative;
+  width: 80%;
+  margin-bottom: 3rem;
+}
+
+.signin-email-holder label,
+.signin-password-holder label,
+.signin-password-confirm-holder label {
+  position: absolute;
+  left: 0;
+  color: #333333;
+  display: block;
+  font-weight: 600;
+  margin-bottom: .5rem;
+  top: -1.5rem;
+  cursor: text;
+  font-size: 120%;
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.signin-email-input,
+.signin-password-input,
+.signin-password-confirm-input {
+  font-family: 'Athiti', sans-serif;
+  font-size: inherit;
+  margin-bottom: .2rem;
+  font-size: 2rem;
+  height: 3rem;
+  font-weight: 600;
+  width: 100%;
+  color: #10b295;
+  border: none;
+  border-bottom: 2px solid;
+  background-color: inherit;
+  transition: letter-spacing .2s;
+}
+
+.signin-email-holder input::placeholder,
+.signin-password-holder input::placeholder,
+.signin-password-confirm-holder input::placeholder {
+  opacity: 1;
+  color: #10b295;
+}
+
+.signin-email-holder input:placeholder-shown:not(:focus)::placeholder,
+.signin-password-holder input:placeholder-shown:not(:focus)::placeholder,
+.signin-password-confirm-holder input:placeholder-shown:not(:focus)::placeholder {
+  opacity: 0;
+}
+
+.signin-email-holder input:placeholder-shown:not(:focus)+*,
+.signin-password-holder input:placeholder-shown:not(:focus)+*,
+.signin-password-confirm-holder input:placeholder-shown:not(:focus)+* {
+  font-size: 2rem;
+  opacity: 1;
+  color: #10b295;
+  top: -.2rem;
+}
+
+/* .player-name-input.ng-valid.ng-not-empty.ng-dirty.ng-valid-parse.ng-touched */
+
+.signin-email-holder input:focus,
+.signin-password-holder input:focus,
+.signin-password-confirm-holder input:focus {
+  color: #10b295;
+  outline: none;
+  /* border-color: #333333; */
+  /* height: 100%; */
+  /* width: 5%; */
+}
+
+.password-show-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width:5%;
+    fill: #10b295;
+}
+
+.signin-email-label {}
+
+.signin-password-holder {}
+
+.signin-password-input {}
+
+.signin-password-label {}
+
+.signin-password-confirm-holder {}
+
+.signin-password-confirm-input {}
+
+.signin-password-confirm-label {}
+
+
+.signin-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:80%;
+}
+.signin-submit-holder {
+    flex-basis: 40%;
+}
+.signin-submit-button,
+.go-signup-button {
+  display: block;
+  font-size: 2rem;
+  margin-top:2rem;
+  padding: .5rem;
+  color: #fafafa;
+  background-color: #10b295;
+  border: 1px solid #1E90FF;
+  border-radius: 10px;
+  outline: none;
+  transition: all .1s;
+  width: 100%;
+  cursor: pointer;
+}
+
+.signin-submit-button:active,
+.go-signup-button:active {
+  transform: scale(1.04) translateX(8px);
+  letter-spacing: .1rem;
+  background-color: #10B2C6;
+}
+.signin-submit-button {
+    background-color: #10b295;
+}
+
+.go-signup-button-holder {
+    flex-basis: 40%;
+}
+
+.go-signup-button {
+    background-color: #1E90FF;
+}

@@ -1,3 +1,4 @@
+import { SignComponent } from './../sign/sign.component';
 import { ErrorsHandlingComponent } from './../errors-handling/errors-handling.component';
 import { CarouselComponent } from './../image-carousel/carousel.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { PreviewComponent } from '../preview/preview.component';
 const routes: Routes = [
     { path: 'carousel/:section', component: CarouselComponent },
     { path: 'preview', component: PreviewComponent },
+    { path: 'sign', component: SignComponent },
     { path: '', redirectTo: 'preview', pathMatch: 'full' },
     { path: '**', component: ErrorsHandlingComponent }
 ]
