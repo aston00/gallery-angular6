@@ -15,6 +15,7 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LimitByPipe } from './limit-by.pipe';
 import { VideoCarouselComponent } from './video-carousel/video-carousel.component';
 import { SignModuleModule } from './sign/sign-module/sign-module.module';
+import { VideosService } from './services/videos/videos.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SignModuleModule } from './sign/sign-module/sign-module.module';
     HttpClientModule,
     RouterModuleModule
   ],
-  providers: [ImagesService],
+  providers: [ImagesService,
+    VideosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

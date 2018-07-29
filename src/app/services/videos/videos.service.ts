@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +15,7 @@ export class VideosService {
   constructor(private http: HttpClient) { }
 
   
-  getImages() {
-    return this.http.get('https://api.pexels.com/v1/search?query=people&per_page=15&page=1', httpOptions)
+  getVideo(section, items, page) {
+    return this.http.get(`https://api.pexels.com/videos/search?query=${section}&per_page=${items}&page=${page}`, httpOptions)
   };
 }
