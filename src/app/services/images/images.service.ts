@@ -11,28 +11,12 @@ const httpOptions = {
 })
 export class ImagesService {
 
-    sections: string[] = [
-        'people',
-        'women',
-        'men',
-        'love',
-        'suits',
-        'black',
-        'rain',
-        'streets',
-        'forest',
-        'nature',
-        'sea',
-        'water'
-    ];
-
-
     constructor(private http: HttpClient) { }
 
-    getCategories() {
-        return this.sections;
-    };
-    
+    getSections(){
+       return this.http.get('http://localhost:8000/image/sections');
+    }
+
     getImagesBySection(section, items, page) {
         return this.http.get(`https://api.pexels.com/v1/search?query=${section}&per_page=${items}&page=${page}`, httpOptions)
     };

@@ -104,7 +104,6 @@ export class CarouselComponent implements OnInit, OnChanges {
         newElement.style.position = 'absolute';
         newElement.style.top = '-2000rem';
         newElement.style.left = '-2000rem';
-        debugger;
         //Passing image section into input field
         newElement.value = this.images[this.imgToPreview].url;
 
