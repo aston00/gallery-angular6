@@ -16,7 +16,7 @@ export class PreviewComponent implements OnInit {
     constructor(private imageService: ImagesService) { }
 
     ngOnInit() {
-        this.imageService.getImagesBySection('people').subscribe((data: any) => this.images = data.photos);
+        this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
         this.sections = this.imageService.getCategories();
 
         let chunk = 4;
@@ -38,7 +38,7 @@ export class PreviewComponent implements OnInit {
         if (section == '')
             return;
 
-        this.imageService.getImagesBySection(section).subscribe((data: any) => {
+        this.imageService.getImagesBySection(section, 15, 1).subscribe((data: any) => {
             this.images = data.photos
         });
     };
