@@ -1,0 +1,33 @@
+@import "./errors-handling-animation.css";
+.error-section {
+  min-height: calc(100vh - 24rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-section-container {}
+
+.error-section-header {}
+
+.error-section-header span.first {
+  animation: first 1.5s ease-in-out, fullFall 5s 1.5s infinite;
+}
+
+.error-section-header span.second {
+  animation: second 2s ease-in-out, uprising 3s 2s infinite;
+}
+
+.error-section-header span.third {
+  animation: third 2.5s ease-in-out, falling 3s 2.5s infinite;
+}
+
+.error-section-header>span {
+  font-size: 16rem;
+  display: block;
+  color: red;
+}
+
+.error-image-container {}
+
+.error-image {}
