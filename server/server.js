@@ -26,7 +26,7 @@ app.route('/image/sections').get((req, res) => {
       'sea',
       'water'
     ]
-  })
+  });
 });
 
 app.listen(8000, () => {

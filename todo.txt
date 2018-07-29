@@ -1,0 +1,8 @@
+TODO:: add server routes for authentication
+TODO:: add animations when switching between sign in and sign up
+TODO:: add sign out in navbar
+TODO:: change styles and colors
+TODO:: add scroll auto-alignment on route switch
+TODO:: add GRID and list view of images => if chosen go to previewer
+TODO:: HTTPInterceptor
+TODO:: route guards
