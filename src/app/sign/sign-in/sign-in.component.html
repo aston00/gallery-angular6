@@ -12,7 +12,7 @@
         <div class="signin-password-holder">
           <input id="signin-password" maxlength="30" name="password" [(ngModel)]="password" #innerPassword placeholder="&nbsp;" type="password" class="signin-password-input">
           <label class="signin-password-label" for="signin-password">Password</label>
-          <svg class="password-show-btn" (click)="innerPassword.type = password.type == 'text' ? 'password' : 'text'">
+          <svg class="password-show-btn" (click)="innerPassword.type = innerPassword.type == 'text' ? 'password' : 'text'">
             <use style="pointer-events: none" [attr.xlink:href]="innerPassword.type == 'text' ? 'assets/img/symbol-defs.svg#icon-eye' : 'assets/img/symbol-defs.svg#icon-eye-blocked'"></use>
           </svg>
         </div>

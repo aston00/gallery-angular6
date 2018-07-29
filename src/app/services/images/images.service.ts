@@ -32,7 +32,7 @@ export class ImagesService {
     getCategories() {
         return this.sections;
     };
-    //TODO:: LAZY LOADING  + 15items
+    
     getImagesBySection(section, items, page) {
         return this.http.get(`https://api.pexels.com/v1/search?query=${section}&per_page=${items}&page=${page}`, httpOptions)
     };
