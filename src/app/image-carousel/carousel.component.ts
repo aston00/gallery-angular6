@@ -13,13 +13,15 @@ export class CarouselComponent implements OnInit, OnChanges {
     imgToPreview: number = 0;
     copiedSuccessfully: boolean = false;
     currentSection;
+    disabled: boolean = false;
     images = [];
     bodyWidth: number = document.querySelector('body').offsetWidth;
-
+    items: number = 15;
+    page: number = 1;
     constructor(private router: Router, private route: ActivatedRoute, private imgService: ImagesService) {
         this.currentSection = this.route.snapshot.paramMap.get('section');
 
-        this.imgService.getImagesBySection(this.currentSection).subscribe((data: any) => {
+        this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
             this.images = data.photos;
         });
     };
@@ -46,6 +48,16 @@ export class CarouselComponent implements OnInit, OnChanges {
         this.copiedSuccessfully = false;
         //Arrows accessibility section
         this.leftDisabled = false;
+
+        if (!this.images[this.imgToPreview + 7]) {
+            this.page++;
+            this.disabled = true;
+            this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
+                this.images = this.images.concat(data.photos);
+                this.disabled = false;
+            });
+        }
+
         this.rightDisabled = this.imgToPreview + 2 >= this.images.length;
         if (this.imgToPreview == this.images.length - 1)
             return;
