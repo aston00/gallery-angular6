@@ -34,7 +34,7 @@
     <div class="carousel-bottomt-slider">
       <div *ngFor="let image of images; index as i; trackBy i" class="carousel-bottom-item-container" [ngClass]="{'chosen' : i == imgToPreview }"
         (click)="showChosenItem(i)">
-        <div class="carousel-bottom-item" [ngStyle]="{'background-image':'url(' + image.src.large + ')'}" (click)="showImage(image)"></div>
+        <div class="carousel-bottom-item" [ngStyle]="{'background-image':'url(' + image.src.large + ')'}"></div>
       </div>
     </div>
   </section>
