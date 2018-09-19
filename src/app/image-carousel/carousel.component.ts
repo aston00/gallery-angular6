@@ -66,7 +66,7 @@ export class CarouselComponent implements OnInit, OnChanges {
         this.imgToPreview++;
 
         //Moving slider in the bottom slider section
-        let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
         let sliderWidth: number = slider.offsetWidth;
         let f = this.imgToPreview / 3;
         if (Number.isInteger(f))
@@ -85,7 +85,7 @@ export class CarouselComponent implements OnInit, OnChanges {
         this.imgToPreview--;
 
         //Moving slider in the bottom slider section
-        let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
         let sliderWidth: number = slider.offsetWidth;
         let f: number = (this.imgToPreview + 1) / 3;
         if (Number.isInteger(f))
@@ -99,7 +99,7 @@ export class CarouselComponent implements OnInit, OnChanges {
 
         //Creating input out of user's view
         let newElement = document.createElement('input');
-        let bodyElement: HTMLElement = document.querySelector('body');
+        const bodyElement: HTMLElement = document.querySelector('body');
         //To prevent user from seeing created input
         newElement.style.position = 'absolute';
         newElement.style.top = '-2000rem';

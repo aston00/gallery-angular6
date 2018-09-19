@@ -63,7 +63,7 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
     this.videoToPreview++;
 
     //Moving slider in the bottom slider section
-    let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+    const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
     let sliderWidth: number = slider.offsetWidth;
     let f = this.videoToPreview / 3;
     if (Number.isInteger(f))
@@ -82,7 +82,7 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
     this.videoToPreview--;
 
     //Moving slider in the bottom slider section
-    let slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+    const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
     let sliderWidth: number = slider.offsetWidth;
     let f: number = (this.videoToPreview + 1) / 3;
     if (Number.isInteger(f))

@@ -20,8 +20,9 @@ export class PreviewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.imageService.getSections().subscribe((data: any) => {
-            this.sections = data.sections;
+        this.imageService.getSections().subscribe((sections: any) => {
+            debugger;
+            this.sections = sections;
             this.splitSections();
         })
         this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);

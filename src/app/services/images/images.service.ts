@@ -14,7 +14,7 @@ export class ImagesService {
     constructor(private http: HttpClient) { }
 
     getSections(){
-       return this.http.get('http://localhost:8000/image/sections');
+       return this.http.get('http://localhost:8000/sections');
     }
 
     getImagesBySection(section, items, page) {

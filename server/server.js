@@ -1,33 +1,26 @@
+/**
+ * BASIC
+ */
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const cors = require('cors')
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const sections = require('./sections/sections');
 
-const corsOptions = {
-  origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
-}
+/**
+ * MIDDLEWARES
+ */
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/sections', sections);
 
-app.use(cors(corsOptions));
 
-app.route('/image/sections').get((req, res) => {
-  res.send({
-    sections: [
-      'people',
-      'women',
-      'men',
-      'love',
-      'suits',
-      'black',
-      'rain',
-      'streets',
-      'forest',
-      'nature',
-      'sea',
-      'water'
-    ]
-  });
-});
+app.route('/authorization').get((req, res) => {
+  res.send(users);
+}).post((req, res) => {
+  res.send(users);
+})
+
 
 app.listen(8000, () => {
   console.log('Server started!!!');

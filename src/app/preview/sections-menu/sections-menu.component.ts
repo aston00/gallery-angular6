@@ -29,7 +29,7 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
     };
 
     showNextSections() {
-        let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        const eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
         let height = eleme.offsetHeight;
         let scrollHeight = eleme.scrollHeight;
         eleme.scrollTop += height;
@@ -40,7 +40,7 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
 
     showPrevSections() {
         this.topDisabled = this.currentSection <= 1;
-        let eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        const eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
         let height = eleme.offsetHeight;
         let now = eleme.scrollTop;
         eleme.scrollTop = now - height;
