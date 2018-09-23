@@ -7,6 +7,7 @@ import { ImagePreviewComponent } from '../preview/preview.component';
 import { PreviewersComponent } from '../previewers.component';
 import { PreviewRouterModule } from '../preview-router/preview-router.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ShowcaseComponent } from '../../showcase/showcase.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     PipesModule
   ],
   declarations: [
+    ShowcaseComponent,
     PreviewersComponent,
     ImagePreviewComponent,
     SectionsMenuComponent,

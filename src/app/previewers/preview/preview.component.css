@@ -9,6 +9,21 @@
     align-items: center;
     height: 25rem;
 }
+.choose-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.choose-section > div {
+    font-size: 3rem;
+    text-decoration: underline;
+    color: #1E90FF;
+    cursor: pointer;
+}
+
+.choose-section > div:hover {
+    color: rgba(30, 143, 255, 0.562);
+}
 
 .gallery-heading h2 {
     color: #1E90FF;

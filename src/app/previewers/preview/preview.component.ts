@@ -1,7 +1,8 @@
 import { VideosService } from './../../services/videos/videos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ImagesService } from '../../services/images/images.service';
 import { Router } from '@angular/router';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
 
 
 @Component({
@@ -12,9 +13,9 @@ import { Router } from '@angular/router';
 
 
 export class ImagePreviewComponent implements OnInit {
-
     images: Array<object>;
     videos: Array<object>;
+    section: string = 'images';
     sortedSections: any = [];
     sections: string[] | string[][] = [];
     newSections: {};
@@ -24,17 +25,24 @@ export class ImagePreviewComponent implements OnInit {
         private videoService: VideosService) {
     }
 
-    ngOnInit() {
-        if(this.router.url.indexOf('image') !== -1){
-            this.imageService.getSections().subscribe((sections: any) => {
-                this.sections = sections;
-                this.splitSections();
-            });
+    changeSection(){
+        this.section = this.section === 'images' ? 'videos' : 'images'; 
+        console.log(this.section);
+        if(this.section === 'images'){
             this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
         } else {
-            this.videoService.getVideo('people', 3, 1).subscribe((data: any) => { console.log(data); this.videos = data.videos });
-
+            this.videoService.getVideo('people', 15, 1).subscribe((data: any) => {console.log(data); this.images = data.videos });
         }
+      }
+    ngOnInit() {
+        this.imageService.getSections().subscribe((sections: any) => {
+            this.sections = sections;
+            this.splitSections();
+        });
+
+       
+            this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
+       
     };
 
     splitSections() {
@@ -51,13 +59,18 @@ export class ImagePreviewComponent implements OnInit {
         this.sections = this.sortedSections;
     }
 
-    onSectionChange(section) {
-        if (section == '')
+    onSectionChange(chosenSection) {
+        if (chosenSection == '')
             return;
-
-        this.imageService.getImagesBySection(section, 15, 1).subscribe((data: any) => {
-            this.images = data.photos
-        });
+        if(this.section === 'images'){
+            this.imageService.getImagesBySection(chosenSection, 15, 1).subscribe((data: any) => {
+                this.images = data.photos
+            });
+        } else {
+            this.videoService.getVideo(chosenSection, 15, 1).subscribe((data: any) => {
+                console.log(data); this.images = data.videos 
+            });
+        }
     };
 
 }

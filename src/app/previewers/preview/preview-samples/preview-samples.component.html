@@ -1,7 +1,13 @@
 <section class="gallery-previewer">
   <div class="gallery-previewer-container">
-      <div class="gallery-previewer-composition">
-          <img *ngFor="let image of (images | limitBy:3); let i = index;  trackBy i" [ngStyle]="{'background-image': 'url(' + image.src.large + ')'}" alt="" class="gallery-previewer-example">
+      <div class="gallery-previewer-composition"  *ngIf="section === 'videos'">
+          <video *ngFor="let video of (images  | limitBy:3 ); let in = index;  trackBy in" 
+          [src]=" video && video.video_files && video.video_files[0] && video.video_files[0].link " class="gallery-previewer-example" controls></video>
+          
       </div>
+      
+      <div  class="gallery-previewer-composition"  *ngIf="section === 'images'">
+            <img  *ngFor="let image of (images  | limitBy:3); let i = index;  trackBy i" [ngStyle]="{'background-image': 'url(' + image?.src?.large + ')'}" alt="" class="gallery-previewer-example">
+          </div>
   </div>
 </section>

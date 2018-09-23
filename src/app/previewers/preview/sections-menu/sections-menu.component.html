@@ -7,8 +7,9 @@
     <ul class="gallery-sidemenu-link-list">
       <ng-container *ngFor="let section of sections[currentSection]">
         <li class="gallery-sidemenu-link-item" (mouseover)="getImagesBySection(section)" *ngIf="section">
+            <a *ngIf="sectionsType === 'videos'" [routerLink]="['/videos', section]" class="gallery-sidemenu-link-a">{{section}}</a>
 
-          <a [routerLink]="['/carousel', section]" class="gallery-sidemenu-link-a">{{section}}</a>
+          <a *ngIf="sectionsType === 'images'" [routerLink]="['/carousel', section]" class="gallery-sidemenu-link-a">{{section}}</a>
         </li>
       </ng-container>
     </ul>

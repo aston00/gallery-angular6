@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./previewers.component.css']
 })
 export class PreviewersComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {

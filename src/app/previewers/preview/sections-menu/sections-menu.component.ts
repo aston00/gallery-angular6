@@ -9,6 +9,7 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
 
     @Input() sections: Array<string>;
     @Output() getImages = new EventEmitter();
+    @Input() sectionsType: string;
 
     currentSection: number = 0;
     topDisabled: boolean = true;
