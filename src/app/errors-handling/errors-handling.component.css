@@ -1,4 +1,5 @@
 @import "./errors-handling-animation.css";
+
 .error-section {
   min-height: calc(100vh - 24rem);
   display: flex;

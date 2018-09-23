@@ -1,7 +1,7 @@
-import { VideoCarouselComponent } from './../video-carousel/video-carousel.component';
+import { VideoCarouselComponent } from './../carousels/video-carousel/video-carousel.component';
 import { SignComponent } from './../sign/sign.component';
 import { ErrorsHandlingComponent } from './../errors-handling/errors-handling.component';
-import { CarouselComponent } from './../image-carousel/carousel.component';
+import { CarouselComponent } from './../carousels/image-carousel/carousel.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <--- JavaScript import from Angular
 import { CommonModule } from '@angular/common';

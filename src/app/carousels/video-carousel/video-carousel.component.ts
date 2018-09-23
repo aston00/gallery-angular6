@@ -1,4 +1,4 @@
-import { VideosService } from './../services/videos/videos.service';
+import { VideosService } from './../../services/videos/videos.service';
 import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({

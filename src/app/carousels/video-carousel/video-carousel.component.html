@@ -7,10 +7,8 @@
         <div style="z-index:22">
           <div class="carousel-main-container" [ngStyle]="{'margin-left': (0 - videoToPreview * 1200) + (bodyWidth - 1200)/2  + 'px'}">
             <div *ngFor="let video of videos; index as i; trackBy i" style="z-index:1">
-              <video preload="auto" class="carousel-preview-image" style="z-index:0" controls [ngStyle]="{'opacity': videoToPreview == i ? '1' : '0'}">
-                <source [attr.src]="video.video_files[0].link" type="video/mp4">
-                <source [attr.src]="video.video_files[0].link" type="video/webm">
-                <source [attr.src]="video.video_files[0].link" type="video/ogg">
+              <video preload="auto" [src]="video.video_files[0].link" class="carousel-preview-image" style="z-index:0" controls [ngStyle]="{'opacity': videoToPreview == i ? '1' : '0'}">
+                
               </video>
             </div>
           </div>

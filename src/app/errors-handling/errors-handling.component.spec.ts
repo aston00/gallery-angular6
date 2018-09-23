@@ -8,9 +8,9 @@ describe('ErrorsHandlingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorsHandlingComponent ]
+      declarations: [ErrorsHandlingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

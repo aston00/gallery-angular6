@@ -1,4 +1,4 @@
-import { ImagesService } from './../services/images/images.service';
+import { ImagesService } from './../../services/images/images.service';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 

@@ -29,9 +29,9 @@ export class ImagePreviewComponent implements OnInit {
         this.section = this.section === 'images' ? 'videos' : 'images'; 
         console.log(this.section);
         if(this.section === 'images'){
-            this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
+            this.imageService.getImagesBySection('people', 3, 1).subscribe((data: any) => this.images = data.photos);
         } else {
-            this.videoService.getVideo('people', 15, 1).subscribe((data: any) => {console.log(data); this.images = data.videos });
+            this.videoService.getVideo('people', 3, 1).subscribe((data: any) => {console.log(data); this.images = data.videos });
         }
       }
     ngOnInit() {
