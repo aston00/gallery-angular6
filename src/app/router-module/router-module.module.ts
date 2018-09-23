@@ -6,13 +6,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <--- JavaScript import from Angular
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { PreviewComponent } from '../preview/preview.component';
+import { PreviewersComponent } from '../previewers/previewers.component';
+
 import { SignRouterModule } from '../sign/sign-router/sign-router.module';
+import { PreviewRouterModule } from '../previewers/preview-router/preview-router.module';
 
 const routes: Routes = [
     { path: 'carousel/:section', component: CarouselComponent },
-    { path: 'preview', component: PreviewComponent },
     { path: 'videos/:section', component: VideoCarouselComponent },
+    { path: 'preview', component: PreviewersComponent },
     { path: 'sign', component: SignComponent },
     { path: '', redirectTo: 'preview', pathMatch: 'full' },
     { path: '**', component: ErrorsHandlingComponent }
@@ -23,7 +25,8 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         RouterModule.forRoot(routes),
-        SignRouterModule
+        SignRouterModule,
+        PreviewRouterModule
     ],
     declarations: [],
     exports: [RouterModule]

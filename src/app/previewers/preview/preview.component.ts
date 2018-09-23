@@ -1,31 +1,40 @@
+import { VideosService } from './../../services/videos/videos.service';
 import { Component, OnInit } from '@angular/core';
-import { ImagesService } from '../services/images/images.service';
+import { ImagesService } from '../../services/images/images.service';
+import { Router } from '@angular/router';
 
 
 @Component({
-    selector: 'app-preview',
+    selector: 'app-image-preview',
     templateUrl: './preview.component.html',
     styleUrls: ['./preview.component.css']
 })
 
 
-export class PreviewComponent implements OnInit {
+export class ImagePreviewComponent implements OnInit {
 
     images: Array<object>;
+    videos: Array<object>;
     sortedSections: any = [];
     sections: string[] | string[][] = [];
     newSections: {};
 
-    constructor(private imageService: ImagesService) {
+    constructor(private imageService: ImagesService,
+            private router: Router,
+        private videoService: VideosService) {
     }
 
     ngOnInit() {
-        this.imageService.getSections().subscribe((sections: any) => {
-            debugger;
-            this.sections = sections;
-            this.splitSections();
-        })
-        this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
+        if(this.router.url.indexOf('image') !== -1){
+            this.imageService.getSections().subscribe((sections: any) => {
+                this.sections = sections;
+                this.splitSections();
+            });
+            this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
+        } else {
+            this.videoService.getVideo('people', 3, 1).subscribe((data: any) => { console.log(data); this.videos = data.videos });
+
+        }
     };
 
     splitSections() {

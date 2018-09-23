@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
