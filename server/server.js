@@ -14,14 +14,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/sections', sections);
 
-
-app.route('/authorization').get((req, res) => {
-  res.send(users);
-}).post((req, res) => {
-  res.send(users);
-})
-
-
 app.listen(8000, () => {
   console.log('Server started!!!');
 });
