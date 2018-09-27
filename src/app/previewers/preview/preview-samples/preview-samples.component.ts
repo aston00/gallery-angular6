@@ -12,13 +12,8 @@ export class PreviewSamplesComponent implements OnInit, OnChanges {
     constructor() { }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.images) {
-            this.images = changes.images.currentValue;
-        }
-
-        if (changes.section) {
-            this.section = changes.section.currentValue;
-        }
+        changes.images && (this.images = changes.images.currentValue);
+        changes.section && (this.section = changes.section.currentValue);
     };
 
     ngOnInit() {

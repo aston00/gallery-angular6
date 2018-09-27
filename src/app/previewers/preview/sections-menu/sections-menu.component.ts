@@ -25,8 +25,7 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
     };
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.sections && changes.sections.currentValue)
-            this.sections = changes.sections.currentValue;
+        changes.sections && changes.sections.currentValue && (this.sections = changes.sections.currentValue);
     };
 
     showNextSections() {

@@ -1,15 +1,18 @@
 import { ImagesService } from './../../services/images/images.service';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-carousel',
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.css']
 })
-export class CarouselComponent implements OnInit, OnChanges {
+export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
     leftDisabled: boolean = true;
     rightDisabled: boolean = false;
+    sub1: Subscription;
+    sub2: Subscription;
     imgToPreview: number = 0;
     copiedSuccessfully: boolean = false;
     currentSection;
@@ -21,12 +24,17 @@ export class CarouselComponent implements OnInit, OnChanges {
     constructor(private router: Router, private route: ActivatedRoute, private imgService: ImagesService) {
         this.currentSection = this.route.snapshot.paramMap.get('section');
 
-        this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
+        this.sub1 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
             this.images = data.photos;
         });
     };
 
     ngOnInit() {
+    }
+
+    ngOnDestroy() {
+        this.sub1 && this.sub1.unsubscribe();
+        this.sub2 && this.sub2.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -52,7 +60,7 @@ export class CarouselComponent implements OnInit, OnChanges {
         if (!this.images[this.imgToPreview + 7]) {
             this.page++;
             this.disabled = true;
-            this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
+            this.sub2 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
                 this.images = this.images.concat(data.photos);
                 this.disabled = false;
             });
@@ -69,8 +77,7 @@ export class CarouselComponent implements OnInit, OnChanges {
         const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
         let sliderWidth: number = slider.offsetWidth;
         let f = this.imgToPreview / 3;
-        if (Number.isInteger(f))
-            document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth;
+        Number.isInteger(f) && (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth);
     };
 
     showPrevImage() {
@@ -88,10 +95,8 @@ export class CarouselComponent implements OnInit, OnChanges {
         const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
         let sliderWidth: number = slider.offsetWidth;
         let f: number = (this.imgToPreview + 1) / 3;
-        if (Number.isInteger(f))
-            document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
-        else
-            document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth;
+        Number.isInteger(f) ? (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth) :
+            (document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth);
 
     };
 
@@ -111,12 +116,8 @@ export class CarouselComponent implements OnInit, OnChanges {
         bodyElement.appendChild(newElement);
         newElement.select();
         let clipboardCopy = document.execCommand('copy');
-
-        if (clipboardCopy)
-            this.copiedSuccessfully = true;
-        else
-            console.log('error while copying to clipbaord');
-
+        
+        clipboardCopy ? (this.copiedSuccessfully = true) : console.log('error while copying to clipbaord');
         //Removing created element from the body
         bodyElement.removeChild(newElement);
     };

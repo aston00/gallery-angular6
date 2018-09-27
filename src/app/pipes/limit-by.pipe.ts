@@ -9,9 +9,7 @@ export class LimitByPipe implements PipeTransform {
     if(!value){
       return;
     }
-    console.log(value);
     let result =  value.slice(0, 3);
-    console.log(result);
     return result;
   }
 

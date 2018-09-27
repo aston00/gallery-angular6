@@ -1,15 +1,18 @@
 import { VideosService } from './../../services/videos/videos.service';
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-video-carousel',
   templateUrl: './video-carousel.component.html',
   styleUrls: ['./video-carousel.component.css']
 })
-export class VideoCarouselComponent implements OnInit, OnChanges {
+export class VideoCarouselComponent implements OnInit, OnChanges, OnDestroy {
   leftDisabled: boolean = true;
   rightDisabled: boolean = false;
   videoToPreview: number = 0;
+  sub1: Subscription;
+  sub2: Subscription;
   copiedSuccessfully: boolean = false;
   currentSection: string;
   disabled: boolean = false;
@@ -22,7 +25,8 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => { console.log(data); this.videos = data.videos });
+    this.sub1 = this.videoServics.getVideo(this.currentSection, this.items, this.page)
+      .subscribe((data: any) => { this.videos = data.videos });
   }
 
 
@@ -49,7 +53,7 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
     if (!this.videos[this.videoToPreview + 7]) {
       this.page++;
       this.disabled = true;
-      this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => {
+      this.sub2 = this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => {
         this.videos = this.videos.concat(data.videos);
         this.disabled = false;
       });
@@ -66,9 +70,13 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
     const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
     let sliderWidth: number = slider.offsetWidth;
     let f = this.videoToPreview / 3;
-    if (Number.isInteger(f))
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth;
+    Number.isInteger(f) && (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth);
   };
+
+  ngOnDestroy() {
+    this.sub1 && this.sub1.unsubscribe();
+    this.sub2 && this.sub2.unsubscribe();
+  }
 
   showPrevImage() {
     this.copiedSuccessfully = false;
@@ -85,11 +93,7 @@ export class VideoCarouselComponent implements OnInit, OnChanges {
     const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
     let sliderWidth: number = slider.offsetWidth;
     let f: number = (this.videoToPreview + 1) / 3;
-    if (Number.isInteger(f))
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
-    else
-      document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth;
-
+    Number.isInteger(f) ? (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth) :
+      (document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth);
   };
-
 }
