@@ -40,7 +40,7 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
             this.sections = sections;
             this.splitSections();
         });
-        this.sub3 = this.imageService.getImagesBySection('people', 15, 1).subscribe((data: any) => this.images = data.photos);
+        this.sub3 = this.imageService.getImagesBySection('people', 3, 1).subscribe((data: any) => this.images = data.photos);
     };
 
     ngOnDestroy() {
@@ -64,7 +64,7 @@ export class ImagePreviewComponent implements OnInit, OnDestroy {
         if (chosenSection == '')
             return;
         this.sub4 = this.section === 'images' ?
-            this.imageService.getImagesBySection(chosenSection, 15, 1).subscribe((data: any) => { this.images = data.photos }) :
-            this.videoService.getVideo(chosenSection, 15, 1).subscribe((data: any) => { this.images = data.videos });
+            this.imageService.getImagesBySection(chosenSection, 3, 1).subscribe((data: any) => { this.images = data.photos }) :
+            this.videoService.getVideo(chosenSection, 3, 1).subscribe((data: any) => { this.images = data.videos });
     };
 };
