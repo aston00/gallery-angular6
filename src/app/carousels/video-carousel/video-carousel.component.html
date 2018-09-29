@@ -6,9 +6,10 @@
       <div class="carousel-main-image">
         <div style="z-index:22">
           <div class="carousel-main-container" [ngStyle]="{'margin-left': (0 - videoToPreview * 1200) + (bodyWidth - 1200)/2  + 'px'}">
-            <div *ngFor="let video of videos; index as i; trackBy i" style="z-index:1">
-              <video preload="auto" [src]="video.video_files[0].link" class="carousel-preview-image" style="z-index:0" controls [ngStyle]="{'opacity': videoToPreview == i ? '1' : '0'}">
-                
+			<div class="carousel-preview-image" *ngIf="videos.length === 0"></div>
+			<div *ngFor="let video of videos; index as i; trackBy i" style="z-index:1">
+              <video preload="auto" [src]="video.video_files[0].link" class="carousel-preview-image" style="z-index:0"
+                controls [ngStyle]="{'opacity': videoToPreview == i ? '1' : '0'}">
               </video>
             </div>
           </div>
@@ -24,7 +25,7 @@
             <span>{{videoToPreview + 1}}</span>
           </div>
 
-          
+
         </div>
       </div>
     </div>
@@ -32,7 +33,7 @@
     <div class="carousel-bottomt-slider">
       <div *ngFor="let video of videos; index as i; trackBy i" class="carousel-bottom-item-container" [ngClass]="{'chosen' : i == videoToPreview }"
         (click)="showChosenItem(i)">
-        <video class="carousel-bottom-item" >
+        <video class="carousel-bottom-item">
           <source [attr.src]="video.video_files[0].link" type="video/mp4" />
         </video>
       </div>

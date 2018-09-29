@@ -4,6 +4,7 @@
       <div class="carousel-main-image">
         <div>
           <div class="carousel-main-container" [ngStyle]="{'margin-left': (0 - imgToPreview * 1200) + (bodyWidth - 1200)/2  + 'px'}">
+            <div class="carousel-preview-image" *ngIf="images.length === 0"></div>
             <div *ngFor="let img of images; index as i; trackBy i">
               <div class="carousel-preview-image" [ngStyle]="{'background-image':'url(' + img.src.large + ')', 'opacity': imgToPreview == i ? '1' : '0'}">
               </div>

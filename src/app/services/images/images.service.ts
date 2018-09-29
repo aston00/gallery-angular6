@@ -19,5 +19,5 @@ export class ImagesService {
 
     getImagesBySection(section, items, page) {
         return this.http.get(`https://api.pexels.com/v1/search?query=${section}&per_page=${items}&page=${page}`, httpOptions)
-    };
-};
+    }
+}

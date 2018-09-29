@@ -38,14 +38,15 @@
   transition: all .6s;
   display: inline-block;
   border: .3rem solid #ccc;
+  min-height: 68rem;
   height: 68rem;
+  min-width: 1200px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: #333;
   border-top-right-radius: .5rem;
   border-top-left-radius: .5rem;
-  /* margin: auto; */
 }
 
 .clipboard-container {

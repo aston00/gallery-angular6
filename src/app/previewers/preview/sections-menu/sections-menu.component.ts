@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, SimpleChange, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-sections-menu',
     templateUrl: './sections-menu.component.html',
     styleUrls: ['./sections-menu.component.css']
 })
-export class SectionsMenuComponent implements OnInit, OnChanges {
+export class SectionsMenuComponent implements OnChanges {
 
     @Input() sections: Array<string>;
     @Output() getImages = new EventEmitter();
@@ -17,16 +17,13 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
 
     constructor() { }
 
-    ngOnInit() {
-    };
+    ngOnChanges(changes: SimpleChanges) {
+        changes.sections && changes.sections.currentValue && (this.sections = changes.sections.currentValue);
+    }
 
     getImagesBySection(section) {
         this.getImages.emit(section);
-    };
-
-    ngOnChanges(changes: SimpleChanges) {
-        changes.sections && changes.sections.currentValue && (this.sections = changes.sections.currentValue);
-    };
+    }
 
     showNextSections() {
         const eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
@@ -36,7 +33,7 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
         this.topDisabled = false;
         this.bottomDisabled = this.currentSection == this.sections.length - 2;
         this.currentSection++;
-    };
+    }
 
     showPrevSections() {
         this.topDisabled = this.currentSection <= 1;
@@ -46,5 +43,5 @@ export class SectionsMenuComponent implements OnInit, OnChanges {
         eleme.scrollTop = now - height;
         this.bottomDisabled = false;
         this.currentSection--;
-    };
+    }
 }
