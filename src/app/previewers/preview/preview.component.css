@@ -16,13 +16,19 @@
 }
 .choose-section > div {
     font-size: 3rem;
-    text-decoration: underline;
+    width: 22rem;
     color: #1E90FF;
+    text-align: center;
     cursor: pointer;
+    border: 2px solid;
+    border-radius: 15px;
+    transition: background-color 1s;
 }
 
-.choose-section > div:hover {
-    color: rgba(30, 143, 255, 0.562);
+.choose-section > div:hover {    
+    background-color: #ccc;
+
+    box-shadow: 0px 1px 4px 1px #1e90ff;
 }
 
 .gallery-heading h2 {

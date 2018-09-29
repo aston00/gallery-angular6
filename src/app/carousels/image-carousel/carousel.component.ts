@@ -14,6 +14,8 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
     sub1: Subscription;
     sub2: Subscription;
     sub3: Subscription;
+    sub4: Subscription;
+    slider: HTMLElement;
     imgToPreview: number = 0;
     copiedSuccessfully: boolean = false;
     currentSection;
@@ -27,30 +29,22 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         this.currentSection = this.route.snapshot.paramMap.get('section');
         this.sub1 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
             this.images = data.photos;
-            console.log(this.images);
         });
     }
 
-    ngOnInit() { 
-        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-        let sliderWidth: number = slider.offsetWidth;
-        let f: number = (this.imgToPreview + 1) / 3;
+    ngOnInit() {
         let ctrl = this;
-        document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
-
-        //::TODO::EVENT CALLED TOO OFTEN 
-        slider.addEventListener('scroll', function(e){
+        this.slider = document.querySelector('.carousel-bottomt-slider');
+        this.slider.addEventListener('scroll', function (e) {
             ctrl.scrollEventFunction(e, ctrl);
         });
     }
 
-    scrollEventFunction(e, ctrl){
+    scrollEventFunction(e, ctrl) {
         let event = <HTMLElement>e.target;
-        if(((event.scrollWidth - event.clientWidth * 2) < event.scrollLeft)){
-            debugger;
-
+        if ((event.scrollWidth - 840) < event.scrollLeft) {
             ctrl.page++;
-            ctrl.imgService.getImagesBySection(ctrl.currentSection, ctrl.items, ctrl.page).subscribe((data: any) => {
+            this.sub4 = ctrl.imgService.getImagesBySection(ctrl.currentSection, ctrl.items, ctrl.page).subscribe((data: any) => {
                 ctrl.images = ctrl.images.concat(data.photos);
                 ctrl.disabled = false;
             });
@@ -65,9 +59,14 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        let ctrl = this;
         this.sub1 && this.sub1.unsubscribe();
         this.sub2 && this.sub2.unsubscribe();
         this.sub3 && this.sub3.unsubscribe();
+        this.sub4 && this.sub4.unsubscribe();
+        this.slider.removeEventListener('scroll', function (e) {
+            ctrl.scrollEventFunction(e, ctrl);
+        });
     }
 
     showChosenItem(index) {
@@ -104,31 +103,25 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
             return;
         this.imgToPreview++;
 
-        //Moving slider in the bottom slider section
-        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-        let sliderWidth: number = slider.offsetWidth;
+        let sliderWidth: number = this.slider.offsetWidth;
         let f = this.imgToPreview / 3;
-        Number.isInteger(f) && (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth);
+        Number.isInteger(f) && (this.slider.scrollLeft = f * sliderWidth);
     }
 
     showPrevImage() {
         this.copiedSuccessfully = false;
-        //Arrows accessibility section
         this.leftDisabled = this.imgToPreview - 2 < 0;
         this.rightDisabled = false;
 
         if (this.imgToPreview == 0)
             return;
 
-        //Showing previous image
         this.imgToPreview--;
 
-        //Moving slider in the bottom slider section
-        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-        let sliderWidth: number = slider.offsetWidth;
+        let sliderWidth: number = this.slider.offsetWidth;
         let f: number = (this.imgToPreview + 1) / 3;
-        Number.isInteger(f) ? (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth) :
-            (document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth);
+        this.slider.scrollLeft = Number.isInteger(f) ? (f * sliderWidth - sliderWidth) :
+            (Math.floor(f) * sliderWidth);
     }
 
     copyToClipboard() {

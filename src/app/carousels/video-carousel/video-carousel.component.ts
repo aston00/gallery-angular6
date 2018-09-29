@@ -14,6 +14,8 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
     sub1: Subscription;
     sub2: Subscription;
     sub3: Subscription;
+    sub4: Subscription;
+    slider: HTMLElement;
     copiedSuccessfully: boolean = false;
     currentSection: string;
     disabled: boolean = false;
@@ -24,17 +26,38 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
 
     constructor(private videoServics: VideosService, public router: Router, public route: ActivatedRoute) {
         this.currentSection = this.route.snapshot.paramMap.get('section');
-    }
-
-    ngOnInit() {
         this.sub1 = this.videoServics.getVideo(this.currentSection, this.items, this.page)
             .subscribe((data: any) => { this.videos = data.videos });
     }
 
+    ngOnInit() {
+        let ctrl = this;
+        this.slider = document.querySelector('.carousel-bottomt-slider');
+        this.slider.addEventListener('scroll', function (e) {
+            ctrl.scrollEventFunction(e, ctrl);
+        });
+    }
+
+    scrollEventFunction(e, ctrl) {
+        let event = <HTMLElement>e.target;
+        if ((event.scrollWidth - 840) < event.scrollLeft) {
+            ctrl.page++;
+            this.sub4 = ctrl.videoServics.getVideo(ctrl.currentSection, ctrl.items, ctrl.page).subscribe((data: any) => {
+                ctrl.videos = ctrl.videos.concat(data.videos);
+                ctrl.disabled = false;
+            });
+        }
+    }
+
     ngOnDestroy() {
+        let ctrl = this;
         this.sub1 && this.sub1.unsubscribe();
         this.sub2 && this.sub2.unsubscribe();
         this.sub3 && this.sub3.unsubscribe();
+        this.sub4 && this.sub4.unsubscribe();
+        this.slider.removeEventListener('scroll', function (e) {
+            ctrl.scrollEventFunction(e, ctrl);
+        });
     }
 
     showChosenItem(index) {
@@ -70,29 +93,22 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
             return;
 
         this.videoToPreview++;
-        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-        let sliderWidth: number = slider.offsetWidth;
+        let sliderWidth: number = this.slider.offsetWidth;
         let f = this.videoToPreview / 3;
-        Number.isInteger(f) && (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth);
+        Number.isInteger(f) && (this.slider.scrollLeft = f * sliderWidth);
     }
 
 
     showPrevImage() {
         this.copiedSuccessfully = false;
-        //Arrows accessibility section
         this.leftDisabled = this.videoToPreview - 2 < 0;
         this.rightDisabled = false;
         if (this.videoToPreview == 0)
             return;
-
-        //Showing previous image
         this.videoToPreview--;
-
-        //Moving slider in the bottom slider section
-        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
-        let sliderWidth: number = slider.offsetWidth;
+        let sliderWidth: number = this.slider.offsetWidth;
         let f: number = (this.videoToPreview + 1) / 3;
-        Number.isInteger(f) ? (document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth) :
-            (document.querySelector('.carousel-bottomt-slider').scrollLeft = Math.floor(f) * sliderWidth);
+        this.slider.scrollLeft = Number.isInteger(f) ? (f * sliderWidth - sliderWidth) :
+            (Math.floor(f) * sliderWidth);
     }
 }
