@@ -16,7 +16,8 @@
           <span class="carousel-next" (click)="!disabled && showNextImage()" [ngClass]="{'fadeArrow' : rightDisabled }">❯</span>
         </div>
         <div class="carousel-caption-container">
-          <p class="carousel-caption-text">{{currentSection}}</p>
+          <p class="carousel-caption-photographer-prefix">Author:&nbsp;</p>
+          <p class="carousel-caption-photographer">{{this.images && this.images[imgToPreview] && this.images[imgToPreview].photographer}}</p>
           <div class="carousel-count">
             <span>{{imgToPreview + 1}}</span>
           </div>

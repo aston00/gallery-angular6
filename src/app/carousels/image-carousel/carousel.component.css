@@ -138,6 +138,22 @@
   border-bottom-right-radius: .5rem;
 }
 
+.carousel-caption-text-holder {
+  position: absolute;
+  display: flex;
+}
+
+
+.carousel-caption-photographer-prefix {
+  font-size: 2rem;
+  color: #fafafa;
+}
+
+.carousel-caption-photographer {
+  font-size: 2.4rem;
+  color: #fafafa;
+}
+
 .carousel-caption-text {
   text-transform: capitalize;
   font-size: 3rem;

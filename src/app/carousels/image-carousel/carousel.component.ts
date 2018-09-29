@@ -27,10 +27,35 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         this.currentSection = this.route.snapshot.paramMap.get('section');
         this.sub1 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
             this.images = data.photos;
+            console.log(this.images);
         });
     }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        const slider: HTMLElement = document.querySelector('.carousel-bottomt-slider');
+        let sliderWidth: number = slider.offsetWidth;
+        let f: number = (this.imgToPreview + 1) / 3;
+        let ctrl = this;
+        document.querySelector('.carousel-bottomt-slider').scrollLeft = f * sliderWidth - sliderWidth;
+
+        //::TODO::EVENT CALLED TOO OFTEN 
+        slider.addEventListener('scroll', function(e){
+            ctrl.scrollEventFunction(e, ctrl);
+        });
+    }
+
+    scrollEventFunction(e, ctrl){
+        let event = <HTMLElement>e.target;
+        if(((event.scrollWidth - event.clientWidth * 2) < event.scrollLeft)){
+            debugger;
+
+            ctrl.page++;
+            ctrl.imgService.getImagesBySection(ctrl.currentSection, ctrl.items, ctrl.page).subscribe((data: any) => {
+                ctrl.images = ctrl.images.concat(data.photos);
+                ctrl.disabled = false;
+            });
+        }
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.images) {
@@ -52,7 +77,8 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         this.imgToPreview = index;
 
         if (this.images.length - 1 === index) {
-            this.sub3 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page + 1).subscribe((data: any) => {
+            this.page++;
+            this.sub3 = this.imgService.getImagesBySection(this.currentSection, this.items, this.page).subscribe((data: any) => {
                 this.images = this.images.concat(data.photos);
                 this.disabled = false;
                 this.rightDisabled = !(this.images.length - 1 > index);

@@ -43,7 +43,8 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
         this.rightDisabled = index == this.videos.length - 1
         this.videoToPreview = index;
         if (this.videos.length - 1 === index) {
-            this.sub3 = this.videoServics.getVideo(this.currentSection, this.items, this.page + 1).subscribe((data: any) => {
+            this.page++;
+            this.sub3 = this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => {
                 this.videos = this.videos.concat(data.videos);
                 this.disabled = false;
                 this.rightDisabled = !(this.videos.length - 1 > index);
