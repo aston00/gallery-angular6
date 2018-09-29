@@ -9,7 +9,6 @@ import { ErrorsHandlingComponent } from './errors-handling/errors-handling.compo
 import { ImagesService } from './services/images/images.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { VideoCarouselComponent } from './carousels/video-carousel/video-carousel.component';
-import { SignModuleModule } from './sign/sign-module/sign-module.module';
 import { VideosService } from './services/videos/videos.service';
 import { PreviewModuleModule } from './previewers/preview-module/preview-module.module';
 import { PipesModule } from './pipes/pipes.module';
@@ -26,7 +25,6 @@ import { PipesModule } from './pipes/pipes.module';
     ],
   imports: [
     PipesModule,
-    SignModuleModule,
     BrowserModule,
     HttpClientModule,
     RouterModuleModule,
