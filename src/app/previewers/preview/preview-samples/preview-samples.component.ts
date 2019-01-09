@@ -10,7 +10,7 @@ export class PreviewSamplesComponent implements OnChanges {
     @Input() section: string;
     constructor() { }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         changes.images && (this.images = changes.images.currentValue);
         changes.section && (this.section = changes.section.currentValue);
     }

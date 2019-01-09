@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LimitByPipe implements PipeTransform {
 
   transform(value: any, limit: number): any {
-    if(!value){
+    if (!value) {
       return;
     }
-    let result =  value.slice(0, 3);
+    let result = value.slice(0, 3);
     return result;
   }
 

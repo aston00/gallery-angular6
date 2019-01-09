@@ -17,30 +17,30 @@ export class SectionsMenuComponent implements OnChanges {
 
     constructor() { }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         changes.sections && changes.sections.currentValue && (this.sections = changes.sections.currentValue);
     }
 
-    getImagesBySection(section) {
+    getImagesBySection(section: string) {
         this.getImages.emit(section);
     }
 
-    showNextSections() {
-        const eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
-        let height = eleme.offsetHeight;
-        let scrollHeight = eleme.scrollHeight;
-        eleme.scrollTop += height;
+    showNextSections(): void {
+        const element: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        let height: number = element.offsetHeight;
+        // let scrollHeight = eleme.scrollHeight;
+        element.scrollTop += height;
         this.topDisabled = false;
         this.bottomDisabled = this.currentSection == this.sections.length - 2;
         this.currentSection++;
     }
 
-    showPrevSections() {
+    showPrevSections(): void {
+        const linkElement: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
+        let elementHeight: number = linkElement.offsetHeight;
+        let scrollDistance: number = linkElement.scrollTop;
         this.topDisabled = this.currentSection <= 1;
-        const eleme: HTMLElement = document.querySelector('.gallery-sidemenu-link-list');
-        let height = eleme.offsetHeight;
-        let now = eleme.scrollTop;
-        eleme.scrollTop = now - height;
+        linkElement.scrollTop = scrollDistance - elementHeight;
         this.bottomDisabled = false;
         this.currentSection--;
     }

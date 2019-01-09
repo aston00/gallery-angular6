@@ -20,7 +20,7 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
     copiedSuccessfully: boolean = false;
     currentSection;
     disabled: boolean = false;
-    images = [];
+    images: Array<Object> = [];
     bodyWidth: number = document.querySelector('body').offsetWidth;
     items: number = 15;
     page: number = 1;
@@ -32,7 +32,7 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         let ctrl = this;
         this.slider = document.querySelector('.carousel-bottomt-slider');
         this.slider.addEventListener('scroll', function (e) {
@@ -40,7 +40,26 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    scrollEventFunction(e, ctrl) {
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.images) {
+            this.images = changes.images.currentValue;
+            document.documentElement.scrollTop = 0;
+        }
+    }
+
+    ngOnDestroy(): void {
+        let ctrl: this = this;
+        this.sub1 && this.sub1.unsubscribe();
+        this.sub2 && this.sub2.unsubscribe();
+        this.sub3 && this.sub3.unsubscribe();
+        this.sub4 && this.sub4.unsubscribe();
+        this.slider.removeEventListener('scroll', function (e) {
+            ctrl.scrollEventFunction(e, ctrl);
+        });
+    }
+
+
+    scrollEventFunction(e: Event, ctrl: this): void {
         let event = <HTMLElement>e.target;
         if ((event.scrollWidth - 840) < event.scrollLeft) {
             ctrl.page++;
@@ -51,25 +70,7 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.images) {
-            this.images = changes.images.currentValue;
-            document.documentElement.scrollTop = 0;
-        }
-    }
-
-    ngOnDestroy() {
-        let ctrl = this;
-        this.sub1 && this.sub1.unsubscribe();
-        this.sub2 && this.sub2.unsubscribe();
-        this.sub3 && this.sub3.unsubscribe();
-        this.sub4 && this.sub4.unsubscribe();
-        this.slider.removeEventListener('scroll', function (e) {
-            ctrl.scrollEventFunction(e, ctrl);
-        });
-    }
-
-    showChosenItem(index) {
+    showChosenItem(index): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = index == 0;
         this.rightDisabled = index == this.images.length - 1
@@ -85,7 +86,7 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    showNextImage() {
+    showNextImage(): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = false;
 
@@ -104,11 +105,11 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         this.imgToPreview++;
 
         let sliderWidth: number = this.slider.offsetWidth;
-        let f = this.imgToPreview / 3;
+        let f: number = this.imgToPreview / 3;
         Number.isInteger(f) && (this.slider.scrollLeft = f * sliderWidth);
     }
 
-    showPrevImage() {
+    showPrevImage(): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = this.imgToPreview - 2 < 0;
         this.rightDisabled = false;
@@ -124,13 +125,13 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
             (Math.floor(f) * sliderWidth);
     }
 
-    copyToClipboard() {
-        let newElement = document.createElement('input');
+    copyToClipboard(): void {
+        const newElement: HTMLInputElement = document.createElement('input');
         const bodyElement: HTMLElement = document.querySelector('body');
         newElement.style.position = 'absolute';
         newElement.style.top = '-2000rem';
         newElement.style.left = '-2000rem';
-        newElement.value = this.images[this.imgToPreview].url;
+        newElement.value = this.images[this.imgToPreview]['url'];
         bodyElement.appendChild(newElement);
         newElement.select();
         let clipboardCopy = document.execCommand('copy');

@@ -19,7 +19,7 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
     copiedSuccessfully: boolean = false;
     currentSection: string;
     disabled: boolean = false;
-    videos = [];
+    videos: Array<Object> = [];
     bodyWidth: number = document.querySelector('body').offsetWidth;
     items: number = 15;
     page: number = 1;
@@ -30,60 +30,63 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
             .subscribe((data: any) => { this.videos = data.videos });
     }
 
-    ngOnInit() {
-        let ctrl = this;
+    ngOnInit(): void {
+        let ctrl: this = this;
         this.slider = document.querySelector('.carousel-bottomt-slider');
         this.slider.addEventListener('scroll', function (e) {
             ctrl.scrollEventFunction(e, ctrl);
         });
     }
 
-    scrollEventFunction(e, ctrl) {
+    scrollEventFunction(e, ctrl): void {
         let event = <HTMLElement>e.target;
         if ((event.scrollWidth - 840) < event.scrollLeft) {
             ctrl.page++;
-            this.sub4 = ctrl.videoServics.getVideo(ctrl.currentSection, ctrl.items, ctrl.page).subscribe((data: any) => {
-                ctrl.videos = ctrl.videos.concat(data.videos);
-                ctrl.disabled = false;
-            });
+            this.sub4 = ctrl.videoServics.getVideo(ctrl.currentSection, ctrl.items, ctrl.page)
+                .subscribe((data: Object) => {
+                    ctrl.videos = ctrl.videos.concat(data['videos']);
+                    ctrl.disabled = false;
+                });
         }
     }
 
-    ngOnDestroy() {
-        let ctrl = this;
+    ngOnDestroy(): void {
+        let ctrl: this = this;
         this.sub1 && this.sub1.unsubscribe();
         this.sub2 && this.sub2.unsubscribe();
         this.sub3 && this.sub3.unsubscribe();
         this.sub4 && this.sub4.unsubscribe();
-        this.slider.removeEventListener('scroll', function (e) {
+        this.slider.removeEventListener('scroll', function (e: UIEvent): void {
             ctrl.scrollEventFunction(e, ctrl);
         });
     }
 
-    showChosenItem(index) {
+    showChosenItem(index: number): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = index == 0;
         this.rightDisabled = index == this.videos.length - 1
         this.videoToPreview = index;
         if (this.videos.length - 1 === index) {
             this.page++;
-            this.sub3 = this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => {
-                this.videos = this.videos.concat(data.videos);
+            this.sub3 = this.videoServics.getVideo(this.currentSection, this.items, this.page)
+            .subscribe((data: object): void => {
+                this.videos = this.videos.concat(data['videos']);
                 this.disabled = false;
                 this.rightDisabled = !(this.videos.length - 1 > index);
             });
         }
     }
 
-    showNextImage() {
+    showNextImage(): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = false;
 
         if (!this.videos[this.videoToPreview + 7]) {
             this.page++;
             this.disabled = true;
-            this.sub2 = this.videoServics.getVideo(this.currentSection, this.items, this.page).subscribe((data: any) => {
-                this.videos = this.videos.concat(data.videos);
+            this.sub2 = this.videoServics.getVideo(this.currentSection, this.items, this.page)
+            .subscribe((data: object): void => {
+                this.videos = this.videos.concat(data['videos']);
                 this.disabled = false;
             });
         }
@@ -94,12 +97,11 @@ export class VideoCarouselComponent implements OnInit, OnDestroy {
 
         this.videoToPreview++;
         let sliderWidth: number = this.slider.offsetWidth;
-        let f = this.videoToPreview / 3;
+        let f: number = this.videoToPreview / 3;
         Number.isInteger(f) && (this.slider.scrollLeft = f * sliderWidth);
     }
 
-
-    showPrevImage() {
+    showPrevImage(): void {
         this.copiedSuccessfully = false;
         this.leftDisabled = this.videoToPreview - 2 < 0;
         this.rightDisabled = false;
